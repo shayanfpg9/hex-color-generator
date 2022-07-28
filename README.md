@@ -1,2 +1,2 @@
-# hex-color-generator
-hex color genarator with JQuery library
+# hex color generator 🤩
+hex color genarator with JQuery library 
