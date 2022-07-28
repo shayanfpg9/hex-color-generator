@@ -1,0 +1,107 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>hex color generator</title>
+
+    <style>
+      * {
+        border-color: #aa33aa;
+        color: #aa33aa;
+        font-size: 1rem;
+        border-radius: 10px;
+      }
+      .color {
+        max-width: 100vw;
+        height: 500px;
+        background-color: #aa33aa;
+        margin-top: 10px;
+      }
+      .hex-color {
+        padding: 5;
+        font-size: 1rem;
+        font-family: tahoma;
+        outline: none;
+
+        border-width: 2px;
+        border-style: solid;
+      }
+      button {
+        padding: 6;
+        background-color: #00000000;
+
+        border-width: 2px;
+        border-style: solid;
+
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="hex">
+        <input
+          type="text"
+          placeholder="write hex color with #"
+          value="#aa33aa"
+          class="hex-color"
+        />
+        <button class="show">show color</button>
+        <button class="random">random color</button>
+        <button class="copy">copy hex color</button>
+        <br />
+        <div class="color"></div>
+      </section>
+    </main>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script>
+      $(document).ready(function () {
+        const ColorInput = $(".hex-color");
+
+        function randomColor(runBefore = false) {
+          const characters = "0123456789ABCDEF";
+          let hex = "#";
+          for (let i = 0; i < 6; i++) {
+            const char =
+              characters[Math.floor(Math.random() * characters.length)];
+            hex += char;
+          }
+          if (!runBefore) show(hex);
+          else return hex;
+        }
+
+        function show(hex) {
+          $(".color").css({ background: hex });
+
+          $(".hex-color , .show , .random , .copy").css({
+            color: hex,
+            "border-color": hex,
+          });
+
+          ColorInput.val(hex);
+        }
+
+        $(".show").click(() => {
+          show(ColorInput.val());
+        });
+
+        $(".random").click(() => {
+          randomColor();
+        });
+
+        $(".copy").click(() => {
+          window.navigator.clipboard.writeText(ColorInput.val()).then(()=>{
+              alert("color copied to the clipboard")
+          })
+        });
+      });
+    </script>
+  </body>
+</html>
